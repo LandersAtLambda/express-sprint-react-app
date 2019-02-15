@@ -26,14 +26,14 @@ class App extends Component {
 	};
 
 	getProjects = () => {
-		axios.get('http://localhost:8000/api/projects').then(res => {
+		axios.get('https://mike-express-sprint.herokuapp.com/api/projects').then(res => {
 			this.setState({ projects: res.data.projects });
 		});
 	};
 	deleteProject = (e, id) => {
 		e.preventDefault();
-		axios.delete(`http://localhost:8000/api/projects/${id}`).then(res => {
-			axios.get('http://localhost:8000/api/projects').then(res => {
+		axios.delete(`https://mike-express-sprint.herokuapp.com/api/projects/${id}`).then(res => {
+			axios.get('https://mike-express-sprint.herokuapp.com/api/projects').then(res => {
 				this.setState({ projects: res.data.projects });
 			});
 		});
@@ -42,36 +42,12 @@ class App extends Component {
 	addProject = e => {
 		e.preventDefault();
 		let project = { name: this.state.name, description: this.state.description };
-		axios.post(`http://localhost:8000/api/projects/`, project).then(res => {
-			axios.get('http://localhost:8000/api/projects').then(res => {
+		axios.post(`https://mike-express-sprint.herokuapp.com/api/projects/`, project).then(res => {
+			axios.get('https://mike-express-sprint.herokuapp.com/api/projects').then(res => {
 				this.setState({ projects: res.data.projects });
 			});
 		});
 	};
-
-	// updateUser = (e, user) => {
-	// 	e.preventDefault();
-	// 	console.log('update user');
-	// 	this.setState({
-	// 		name: user.name,
-	// 		bio: user.bio,
-	// 		id: user.id,
-	// 		isEditing: true,
-	// 	});
-	// };
-	// submitUser = e => {
-	// 	console.log('submitUser');
-	// 	e.preventDefault();
-	// 	// let id = this.state.id;
-	// 	let changed = { name: this.state.name, bio: this.state.bio };
-	// 	axios.put(`http://localhost:8000/api/users/${this.state.id}`, changed).then(res => {
-	// 		console.log('put response', res);
-	// 		axios.get('http://localhost:8000/api/users').then(res => {
-	// 			this.setState({ users: res.data.users });
-	// 		});
-	// 	});
-	// 	this.setState({ isEditing: false });
-	// };
 	render() {
 		return (
 			<div className="App">
@@ -100,7 +76,6 @@ class App extends Component {
 							<p>{project.completed ? 'Completed' : 'Not Completed'}</p>
 
 							<button onClick={e => this.deleteProject(e, project.id)}>Delete</button>
-							{/* <button onClick={e => this.updateUser(e, user)}>Edit</button> */}
 						</div>
 					))}
 				</div>
